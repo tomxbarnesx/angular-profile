@@ -1,16 +1,19 @@
 <div class="container">
-    <div class="col-sm-12">
-      <button class="btn btn-dark pull-right mb-4" (click)="openModalAdd(add)">Add New Profile</button>
-      <div class="card-columns">
-        <div *ngFor="let user of users" class="card">
-            <img class="card-img-top" src={{user.profileImage}} alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{user.name}}</h5>
-              <p class="card-text"><strong>Age: </strong>{{user.age}} </p>
-              <button class="btn btn-sm btn-warning" (click)="openModalEdit(edit, user)">Edit</button> | 
-              <button class="btn btn-sm btn-danger" (click)="openModalDelete(delete, user._id)">Delete</button>
-            </div>
+  <div class="col-sm-12">
+    <button class="btn btn-dark pull-right mb-4" (click)="openModalAdd(add)">Add New Profile</button>
+    <div class="card-columns">
+      <div *ngFor="let user of users" class="card">
+        <img class="card-img-top" src={{user.profileImage}} alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{user.name}}</h5>
+          <p class="card-text"><strong>Age: </strong>{{user.age}} </p>
+          <button class="btn btn-sm btn-warning" (click)="openModalEdit(edit, user)">Edit</button> | 
+          <button class="btn btn-sm btn-danger" (click)="openModalDelete(delete, user._id)">Delete</button>
         </div>
+      </div>
+    </div>
+    <div *ngIf="!users || !users.length">
+      <h5>No profiles found. Why don't you add one?</h5>
     </div>
   </div>
 </div>
