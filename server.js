@@ -2,6 +2,32 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongo = require('mongoose');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './src/assets/');      
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
+
+// const fileFilter = (req, file, cb) => {
+//     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+//         cb(null, true);
+//     } else {
+//         cb(null, false);
+//     }
+// };
+
+const upload = multer({
+    storage: storage, 
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    // fileFilter: fileFilter
+});
 
 var db = mongo.connect('mongodb://127.0.0.1:27017/angularProfile', function(err, response){
     if (err) {
@@ -11,7 +37,8 @@ var db = mongo.connect('mongodb://127.0.0.1:27017/angularProfile', function(err,
     }
 });
 
-const app = express()
+const app = express();
+// app.use('/uploads', express.static('uploads'));
 app.use(bodyParser());
 app.use(bodyParser.json({limit:'5mb'}));
 app.use(bodyParser.urlencoded({extended:true}));
@@ -29,12 +56,19 @@ var Schema = mongo.Schema;
 var UsersSchema = new Schema({
     name: { type: String },
     age: { type: String }, 
+    profileImage: { type: String }
 }, { versionKey: false });
 
 var model = mongo.model('users', UsersSchema, 'users');
 
-app.post('/api/SaveUser', function(req, res){
-    var mod = new model(req.body);
+app.post('/api/SaveUser', upload.single('profileImage'), function(req, res){
+    // var mod = new model(req.body);
+    console.log(req.file);
+    var mod = new model({
+        name: req.body.name,
+        age: req.body.age,
+        profileImage: req.file.path.slice(4)
+    }); 
     mod.save(function(err, data){
         if (err) {
             res.send(err);

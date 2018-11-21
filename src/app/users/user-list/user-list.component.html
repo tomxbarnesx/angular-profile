@@ -3,7 +3,7 @@
       <button class="btn btn-primary pull-right" (click)="openModalAdd(add)">Add New Profile</button>
       <div class="row justify-content-center">
         <div *ngFor="let user of users" class="card m-4" style="width: 17rem;">
-            <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
+            <img class="card-img-top" src={{user.profileImage}} alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{user.name}}</h5>
                 <p class="card-text"><strong>Age: </strong>{{user.age}} </p>
