@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const mongo = require('mongoose');
+const mongoose = require('mongoose');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -29,7 +29,7 @@ const upload = multer({
     // fileFilter: fileFilter
 });
 
-var db = mongo.connect('mongodb://127.0.0.1:27017/angularProfile', function(err, response){
+var db = mongoose.connect('mongodb://127.0.0.1:27017/angularProfile', function(err, response){
     if (err) {
         console.log(err);
     } else {
@@ -51,7 +51,7 @@ app.use(function (req, res, next) {
     next();
 })
 
-var Schema = mongo.Schema;
+var Schema = mongoose.Schema;
 
 var UsersSchema = new Schema({
     name: { type: String },
@@ -59,7 +59,7 @@ var UsersSchema = new Schema({
     profileImage: { type: String }
 }, { versionKey: false });
 
-var model = mongo.model('users', UsersSchema, 'users');
+var model = mongoose.model('users', UsersSchema, 'users');
 
 app.post('/api/SaveUser', upload.single('profileImage'), function(req, res){
     // var mod = new model(req.body);

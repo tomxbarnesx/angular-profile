@@ -32,7 +32,12 @@
       <input type="text" class="form-control" name="age" [(ngModel)]="user.age">
       <p class="text-danger">{{ errorMsg.age}}</p>
 
+      <label for="profileImage">Profile Picture</label>
+      <input type="file" class="form-control" name="profileImage" [(ngModel)]="user.profileImage" ng2FileSelect [uploader]="uploader">
+      <p class="text-danger">{{ errorMsg.profileImage }}</p>
       <button class="btn btn-primary" (click)="onSave()">Save</button>
+
+      <!-- <button class="btn btn-primary" (click)="onSave()" (click)="uploader.uploadAll()">Save</button> -->
     </form>
   </div>
 </ng-template>
