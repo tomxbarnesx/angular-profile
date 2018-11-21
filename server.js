@@ -111,6 +111,8 @@ app.get('/api/GetUser', function(req, res){
     });
 })
 
-app.listen(8080, function () {
+var PORT = process.env.PORT || 8080;
+
+app.listen(PORT, function () {
     console.log('Profile app listening on port 8080.')
 })
