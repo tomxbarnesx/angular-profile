@@ -1,26 +1,16 @@
 <div class="container">
-  <div class="row">
     <div class="col-sm-12">
-      <button class="btn btn-primary pull-right" (click)="openModalAdd(add)">Add</button>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users">
-            <td> {{user.name}} </td>
-            <td> {{user.age}} </td>
-            <td>
-              <button class="btn btn-warning" (click)="openModalEdit(edit, user)">Edit</button> | 
-              <button class="btn btn-danger" (click)="openModalDelete(delete, user._id)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <button class="btn btn-primary pull-right" (click)="openModalAdd(add)">Add New Profile</button>
+      <div class="row justify-content-center">
+        <div *ngFor="let user of users" class="card m-4" style="width: 17rem;">
+            <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{user.name}}</h5>
+                <p class="card-text"><strong>Age: </strong>{{user.age}} </p>
+                <button class="btn btn-warning" (click)="openModalEdit(edit, user)">Edit</button> | 
+                <button class="btn btn-danger" (click)="openModalDelete(delete, user._id)">Delete</button>
+              </div>
+        </div>
     </div>
   </div>
 </div>
