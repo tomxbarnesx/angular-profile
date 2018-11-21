@@ -1,0 +1,10 @@
+.about-text {
+    background:rgba(255,255,255,0.7);
+}
+
+@media (max-width: 575.98px) { 
+
+    .ladder-img {
+    max-width: 100%;
+    }
+}
